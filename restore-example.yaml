@@ -1,0 +1,7 @@
+apiVersion: velero.io/v1
+kind: Restore
+metadata:
+  name: restore-argocd-20250513
+  namespace: velero
+spec:
+  backupName: argocd-backup-20250513
