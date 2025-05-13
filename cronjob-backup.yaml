@@ -1,0 +1,24 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: velero-argocd-backup
+  namespace: velero
+spec:
+  schedule: "0 2 * * *"  # Executa todo dia às 2h
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          serviceAccountName: velero
+          containers:
+          - name: velero
+            image: velero/velero:v1.13.1
+            command:
+            - /velero
+            - backup
+            - create
+            - argocd-backup-$(date +%Y%m%d%H%M)
+            - --include-namespaces=argocd
+            - --include-cluster-resources=true
+            - --wait
+          restartPolicy: OnFailure
