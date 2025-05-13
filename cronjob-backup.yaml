@@ -17,7 +17,7 @@ spec:
             - /velero
             - backup
             - create
-            - argocd-backup-$(date +%Y%m%d%H%M)
+            - argocd-backup-$(date +%Y%m%d)
             - --include-namespaces=argocd
             - --include-cluster-resources=true
             - --wait
